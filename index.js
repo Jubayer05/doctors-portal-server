@@ -13,11 +13,13 @@ const port = 5000;
 
 
 
-const uri = "mongodb+srv://Patients:jbud8lQuusbeojTu@cluster0.rwssf.mongodb.net/DoctorsPortal?retryWrites=true&w=majority";
+const uri =`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.rwssf.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true });
 client.connect(err => {
-  const collection = client.db("DoctorsPortal").collection("PatiantsCollection");
-
+  const collection = client.db(`${process.env.DB_NAME}`).collection(`${process.env.DB_COLLECTION}`);
+  collection.insertOne({
+    name: "Jubayer Ahmed"
+  })
   
 });
 
